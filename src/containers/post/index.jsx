@@ -22,15 +22,18 @@ export default function Post({
   }
 
   const deletePost = () => {
-    const imgRef = storage.refFromURL(postPhoto);
-    imgRef
-      .delete()
-      .then(() => {
-        // console.log("Successfully deleted from storage")
-      })
-      .catch(() => {
-        // console.log("Error deleting post from storage")
-      });
+    if (postPhoto) {
+      const imgRef = storage.refFromURL(postPhoto);
+      imgRef
+        .delete()
+        .then(() => {
+          // console.log("Successfully deleted from storage")
+        })
+        .catch(() => {
+          // console.log("Error deleting post from storage")
+        });
+    }
+
     db.collection("posts")
       .doc(postId)
       .delete()
